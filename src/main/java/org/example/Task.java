@@ -27,7 +27,7 @@ public class Task {
 
     public Task(String title) {
         this();
-        this.title = title;
+        this.title = Messages.capitalise(title);
     }
 
     public Task() {
@@ -47,7 +47,7 @@ public class Task {
     }
 
     public void updateTitle(String title) {
-        this.title = title;
+        this.title = Messages.capitalise(title);
         this.updateDateAndTime();
     }
 

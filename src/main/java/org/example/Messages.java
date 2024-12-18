@@ -169,4 +169,11 @@ public class Messages {
             }
         }
     }
+
+    public static String capitalise(String str) {
+        if (str.isEmpty()) {
+            return str;
+        }
+        return Character.toString(str.charAt(0)).toUpperCase() + str.substring(1).toLowerCase();
+    }
 }
