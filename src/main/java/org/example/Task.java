@@ -11,6 +11,9 @@ public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Sr")
+    private int id;
+
+    @Transient
     private int serialNo;
 
     @Column(name = "Title")
@@ -36,6 +39,9 @@ public class Task {
         this.time = LocalTime.now();
     }
 
+    public int getId() {
+        return this.id;
+    }
 
     public void updateCompleted(Boolean completed) {
         this.isCompleted = completed;
@@ -68,6 +74,10 @@ public class Task {
         return serialNo;
     }
 
+    public void setSerialNo(int sr) {
+        this.serialNo = sr;
+    }
+
     public String getTime() {
         return this.time.format(DateTimeFormatter.ofPattern("hh:mm"));
     }
@@ -76,7 +86,7 @@ public class Task {
     @Override
     public String toString() {
         return "\nTask- " + this.serialNo +
-                "\nSr: " + getSerialNo() +
+                "\nId: " + getId() +
                 "\ntitle: " + getTitle() +
                 "\nisCompleted: " + isCompleted() +
                 "\nDate: " + getDate() +

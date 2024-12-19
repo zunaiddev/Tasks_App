@@ -26,7 +26,8 @@ public class Messages {
                  1. Show Task List
                  2. Add New Task
                  3. Edit Task
-                 4. Save &""" + RED + " Exit" + RESET);
+                 4. Delete Task
+                 5. Save &""" + RED + " Exit" + RESET);
 
         int choice = 0;
 
@@ -40,7 +41,7 @@ public class Messages {
             }
 
             System.out.println("Processing...");
-            if (choice >= 1 && choice <= 4) {
+            if (choice >= 1 && choice <= 5) {
                 return choice;
             } else {
                 System.out.print(RED + "\nInvalid Input" + RESET);
@@ -68,47 +69,56 @@ public class Messages {
         }
     }
 
-//    public static void delTaskMenu() {
-//        int sr;
-//        String choice;
-//        Task task;
-//
-//        System.out.println(BOLD + BLUE + "\n>>> Delete Menu" + RESET);
-//
-//        while (true) {
-//            System.out.print("\nEnter Serial Number of Task to Delete: ");
-//
-//            try {
-//                sr = scan.nextInt();
-//                if (!list.isExist(sr)) {
-//                    System.out.println("Couldn't Find Any Task With Serial No." + CYAN + sr + RESET + ".");
-//                    continue;
-//                } else {
-//                    task = Database.get(sr);
-//                    list.displayTask(task);
-//                }
-//
-//                scan.nextLine();
-//                break;
-//            } catch (Exception exc) {
-//                System.out.print(RED + "\nInvalid Input" + RESET);
-//                scan.nextLine();
-//            }
-//        }
-//        while (true) {
-//            System.out.print("Are You Sure You want to delete this task (Y | N): ");
-//            choice = scan.nextLine().trim().toLowerCase();
-//
-//            if (choice.equals("y") || choice.equals("n")) {
-//                Database.delete(task);
-//                System.out.println("Successfully Deleted: ");
-//                return;
-//            } else {
-//                System.out.print(RED + "\nInvalid Input" + RESET);
-//            }
-//        }
-//
-//    }
+    public static void delTaskMenu() {
+        int sr;
+        String choice;
+        Task task;
+
+        System.out.println(BOLD + BLUE + "\n>>> Delete Menu" + RESET);
+
+        list.displayTasks();
+
+        while (true) {
+            System.out.print("\nEnter Serial Number of Task to Delete or -1 for Main Menu: ");
+
+            try {
+                sr = scan.nextInt();
+
+                if (sr == -1) {
+                    return;
+                }
+
+                if (!list.isExist(sr)) {
+                    System.out.println("Couldn't Find Any Task With Serial No." + CYAN + sr + RESET + ".");
+                    continue;
+                } else {
+                    task = Database.get(list.getId(sr));
+                    list.displayTask(task);
+                }
+
+                scan.nextLine();
+                break;
+            } catch (Exception exc) {
+                System.out.print(RED + "\nInvalid Input" + RESET);
+                scan.nextLine();
+            }
+        }
+
+        while (true) {
+            System.out.print("Are You Sure You want to delete this task (Y | N): ");
+            choice = scan.nextLine().trim().toLowerCase();
+
+            if (choice.equals("y") || choice.equals("n")) {
+                if (!choice.equals("n")) {
+                    Database.delete(task);
+                    System.out.println(GREEN + "Successfully Deleted:" + RESET);
+                }
+                return;
+            } else {
+                System.out.print(RED + UNDERLINE + "\nInvalid Choice" + RESET);
+            }
+        }
+    }
 
     public static void updateMenu() {
         String title;
@@ -134,7 +144,7 @@ public class Messages {
                     System.out.println("Couldn't Find Any Task With Serial No." + CYAN + sr + RESET + ".");
                     continue;
                 } else {
-                    task = Database.get(sr);
+                    task = Database.get(list.getId(sr));
                     list.displayTask(task);
                 }
 
@@ -158,6 +168,10 @@ public class Messages {
         while (true) {
             System.out.print("Update Status (C | P): ");
             status = scan.nextLine().trim().toLowerCase();
+
+            if (status.isEmpty()) {
+                break;
+            }
 
             if (status.equals("c") || status.equals("p")) {
                 task.updateCompleted(status.equals("c"));

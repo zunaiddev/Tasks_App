@@ -25,6 +25,9 @@ public class App {
                     Messages.updateMenu();
                     break;
                 case 4:
+                    Messages.delTaskMenu();
+                    break;
+                case 5:
                     Database.close();
                     return;
             }

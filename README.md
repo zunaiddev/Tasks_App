@@ -29,6 +29,13 @@ in the database using Hibernate.
 </li>
 
 <li>
+<h4>Delete Task:</h4>
+<span>Allow users to delete a 
+task from the database. This functionality removes the 
+task permanently from the database.</span>
+</li>
+
+<li>
 <h4>Save and Exit:</h4>
 <span>Safely save changes to the database and 
 exit the application.</span>
@@ -47,8 +54,8 @@ exit the application.</span>
 <ul>
 <li>Smooth integration with Hibernate for 
 managing tasks in the database.</li>
-<li>CRUD Operations: Create, Read,
-Update, and Save tasks efficiently.</li>
+<li>CRUD Operations: Create, Read, Update, Delete, 
+and Save tasks efficiently.</li>
 <li>User-friendly CMD interface 
 for easy task management.</li>
 <li>Data persistence ensures tasks remain intact 

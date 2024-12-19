@@ -1,16 +1,14 @@
 package org.example;
 
-
-import java.util.ArrayList;
+import java.util.List;
 
 public class ToDoList {
     private static int total;
     private static int completed;
     private final String format;
-    private ArrayList<Task> tasks;
+    private List<Task> tasks;
 
     public ToDoList() {
-        this.tasks = new ArrayList<>();
         format = "%-6s %-57s %-15s %-18s %-10s";
     }
 
@@ -69,9 +67,25 @@ public class ToDoList {
             System.out.println(Messages.RED + "No Tasks Found" + Messages.RESET);
         }
 
-        for (Task task : tasks) {
+//        for (Task task : tasks) {
+//            displayTask(task);
+//        }
+
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            task.setSerialNo(i + 1);
             displayTask(task);
         }
+    }
+
+    public int getId(int sr) {
+        for (Task task : tasks) {
+            if (task.getSerialNo() == sr) {
+                return task.getId();
+            }
+        }
+
+        return -1;
     }
 
     public void displayTask(Task task) {
