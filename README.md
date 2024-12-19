@@ -72,5 +72,5 @@ after exiting the application.</li>
     <h3 style="margin-bottom: 10px;">Contact Information</h3>
     <p style="margin: 5px 0;"><strong>Name:</strong> Zunaid</p>
     <p style="margin: 5px 0;"><strong>Email:</strong> <a href="mailto:zunaiddev@outlook.com" style="color: #007BFF; text-decoration: none;">zunaiddev@outlook.com</a></p>
-    <p style="margin: 5px 0;"><strong>GitHub:</strong> <a href="https://github.com/zunaiddev" target="_blank" style="color: #007BFF; text-decoration: none;">github.com/zunaiddev</a></p>
+    <p style="margin: 5px 0;"><strong>Linkedin:</strong> <a href="https://linkedin.com/in/zunaiddev" target="_blank" style="color: #007BFF; text-decoration: none;">linkedin.com/in/zunaiddev</a></p>
 </div>
