@@ -14,6 +14,7 @@ public class Database {
     private static final ServiceRegistry sr;
 
     static {
+        System.out.println("Processing...");
         Configuration config = new Configuration().configure("hibernate.cfg.xml");
 
         sr = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();

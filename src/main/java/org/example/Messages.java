@@ -40,7 +40,6 @@ public class Messages {
                 scan.nextLine();
             }
 
-            System.out.println("Processing...");
             if (choice >= 1 && choice <= 5) {
                 return choice;
             } else {
@@ -76,7 +75,9 @@ public class Messages {
 
         System.out.println(BOLD + BLUE + "\n>>> Delete Menu" + RESET);
 
-        list.displayTasks();
+        if (!list.displayTasks()) {
+            return;
+        }
 
         while (true) {
             System.out.print("\nEnter Serial Number of Task to Delete or -1 for Main Menu: ");
@@ -133,7 +134,9 @@ public class Messages {
                 "\n\t- 'C' For Mark as" + GREEN + " Completed" + RESET +
                 "\n\t- 'P' For Mark as" + Yellow + " Pending" + RESET);
 
-        list.displayTasks();
+        if (!list.displayTasks()) {
+            return;
+        }
 
         while (true) {
             System.out.print("\nEnter Serial Number of Task to update: ");

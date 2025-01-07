@@ -56,7 +56,7 @@ public class ToDoList {
         System.out.println(Messages.UNDERLINE + " ".repeat(105) + Messages.RESET);
     }
 
-    public void displayTasks() {
+    public Boolean displayTasks() {
         this.updateTasks();
 
         if (!tasks.isEmpty()) {
@@ -65,6 +65,7 @@ public class ToDoList {
             System.out.printf((format) + "%n", "---", "-----", "------", "----", "----");
         } else {
             System.out.println(Messages.RED + "No Tasks Found" + Messages.RESET);
+            return false;
         }
 
 //        for (Task task : tasks) {
@@ -76,6 +77,7 @@ public class ToDoList {
             task.setSerialNo(i + 1);
             displayTask(task);
         }
+        return true;
     }
 
     public int getId(int sr) {
