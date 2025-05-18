@@ -13,7 +13,7 @@
         <property name="hibernate.show_sql">false</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
         <!-- Mapping class -->
-        <mapping class="org.example.Task"/>
+        <!--        <mapping class="org.example.Task"/>-->
 
     </session-factory>
 

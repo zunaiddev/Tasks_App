@@ -10,49 +10,37 @@ import org.hibernate.service.ServiceRegistry;
 import java.util.List;
 
 public class Database {
-    private static final Session session;
-    private static final ServiceRegistry sr;
+    private static final SessionFactory factory;
 
     static {
         System.out.println("Processing...");
-        Configuration config = new Configuration().configure("hibernate.cfg.xml");
+        Configuration config = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Task.class);
 
-        sr = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
-        SessionFactory sessionFactory = config.buildSessionFactory(sr);
-        session = sessionFactory.openSession();
+        ServiceRegistry registry = new StandardServiceRegistryBuilder().applySettings(config.getProperties()).build();
+        factory = config.buildSessionFactory(registry);
     }
 
     public static void save(Task task) {
+        Session session = factory.openSession();
         session.beginTransaction();
         session.persist(task);
         session.getTransaction().commit();
         System.out.println("saved");
     }
 
-    /*public static ArrayList<Task> get() {
-        ArrayList<Task> tasks = new ArrayList<>();
-
-        Task task = session.get(Task.class, 1);
-
-        for (int i = 2; task != null; i++) {
-            tasks.add(task);
-            task = session.get(Task.class, i);
-        }
-
-        return tasks;
-    }*/
-
     public static Task get(int id) {
+        Session session = factory.openSession();
         return session.get(Task.class, id);
     }
 
     public static List<Task> get() {
-        final String QUERY = "FROM Task";
-        TypedQuery<Task> q = session.createQuery(QUERY, Task.class);
+        Session session = factory.openSession();
+        TypedQuery<Task> q = session.createQuery("FROM Task", Task.class);
         return q.getResultList();
     }
 
     public static void update(Task task) {
+        Session session = factory.openSession();
         session.beginTransaction();
         session.merge(task);
         session.getTransaction().commit();
@@ -60,14 +48,14 @@ public class Database {
     }
 
     public static void delete(Task task) {
+        Session session = factory.openSession();
         session.beginTransaction();
         session.remove(task);
         session.getTransaction().commit();
     }
 
     public static void close() {
-        session.close();
-        sr.close();
+        factory.close();
         System.out.println("App Closed...");
     }
 }
